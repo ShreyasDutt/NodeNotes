@@ -15,11 +15,8 @@ const invalidFileNameCharacters = ["<", ">", ":", "\"", "/", "\\", "|", "?", "*"
 app.get('/', (req, res) => {
 
     fs.readdir('./files', (err, files) => {
-//        console.log(files);
         res.render("index", {notes: files});
     })
-
-
 })
 
 
@@ -57,6 +54,13 @@ app.post('/create', (req, res) => {
             res.redirect('/');
         })
     }
+})
+
+app.post('/delete/:filename', (req, res) => {
+    fs.unlink(`./files/${req.params.filename}`, (err) => {
+        if (err) console.log("Error while DELETE : " + err.message);
+        res.redirect('/')
+    })
 })
 
 app.listen(5000, (err) => {
