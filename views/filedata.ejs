@@ -17,8 +17,13 @@
 
         </div>
         <div class='bg-zinc-800 rounded-lg p-10 w-[60%]'>
-            <h1 class="font-bold text-3xl text-yellow-600 mb-10"><%= name %></h1>
-            <p class="text-xl"><%= filedata %></p>
+            <div class='flex  mb-10 gap-[43%]'>
+                <h1 class="font-bold text-3xl text-yellow-600"><%= name %></h1>
+                <form action="/edit/<%= name %>"></form>
+                <a href="/edit/<%= name %>" class='py-2.5 px-6 text-sm bg-indigo-50 text-indigo-500 rounded-lg cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-100'>Edit</a>
+            </div>
+
+            <p class="text-xl p-2.5"><%= filedata %></p>
         </div>
 
     </body>

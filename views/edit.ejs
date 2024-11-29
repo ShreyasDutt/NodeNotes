@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Node:Notes</title>
+    </head>
+    <body class="bg-zinc-900 text-white flex flex-col items-center justify-center mt-20">
+        <a href="/files/<%= name %>" class='py-2.5 px-6 text-sm bg-indigo-50 text-indigo-500 rounded-lg cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-100 mb-10'>Back</a>
+
+
+
+
+
+
+
+        <form action="/edit/<%= name %>" method='POST' class='bg-zinc-800 rounded-lg p-10 w-[60%]'>
+
+
+            <div class="flex justify-between gap-[80%] items-center w-full">
+                <h1 class="font-bold text-3xl text-yellow-600"><%= name %></h1>
+                <button
+                    type='submit'
+                    href="/edit/<%= name %>"
+                    class="py-2.5 px-6 text-sm bg-green-50 text-green-500 rounded-lg cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-green-100">
+                    Save
+                </button>
+            </div>
+
+
+            <input type='text' name='filedata' class="text-xl bg-zinc-800 text-white mt-5 w-full p-2.5" value='<%= filedata %>'></input>
+
+
+        </form>
+
+
+
+
+
+    </body>
+</html>

@@ -63,6 +63,27 @@ app.post('/delete/:filename', (req, res) => {
     })
 })
 
+app.get('/edit/:filename', (req, res) => {
+
+    fs.readFile(`./files/${req.params.filename}`, "utf-8", (err, data) => {
+        if (err) {
+            console.log(`Error while reading file ${req.params.filename} :` + err.message);
+            res.redirect('/')
+        }
+
+        res.render('edit', {filedata: data, name: req.params.filename});
+    })
+})
+
+app.post("/edit/:filename", (req, res) => {
+
+    fs.writeFile(`./files/${req.params.filename}`, `${req.body.filedata}`, (err) => {
+        if (err) console.log(err.message);
+
+    })
+    res.redirect(`/files/${req.params.filename}`);
+})
+
 app.listen(5000, (err) => {
     if (err) console.log("Error: " + err.message);
     console.log("Server running on Port 5000")
