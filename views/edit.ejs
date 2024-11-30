@@ -19,8 +19,10 @@
         <form action="/edit/<%= name %>" method='POST' class='bg-zinc-800 rounded-lg p-10 w-[60%]'>
 
 
-            <div class="flex justify-between gap-[80%] items-center w-full">
-                <h1 class="font-bold text-3xl text-yellow-600"><%= name %></h1>
+            <div class="flex justify-between gap-[40%] items-center w-full">
+                <label>
+                    <input class="font-bold text-3xl text-yellow-600 bg-zinc-800 text-white w-96 p-2.5 " value="<%= name %>" name="filename">
+                </label>
                 <button
                     type='submit'
                     href="/edit/<%= name %>"
@@ -29,8 +31,9 @@
                 </button>
             </div>
 
-
-            <input type='text' name='filedata' class="text-xl bg-zinc-800 text-white mt-5 w-full p-2.5" value='<%= filedata %>'></input>
+            <label>
+                <input type='text' name='filedata' class="text-xl bg-zinc-800 text-white mt-5 w-full p-2.5" value='<%= filedata %>'>
+            </label>
 
 
         </form>

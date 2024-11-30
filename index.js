@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("node:path");
 const app = express();
 const fs = require('node:fs')
+const fss = require('node:fs/promises')
 app.set("view engine", "ejs");
 
 app.use(express.json());//to read json formatted data
@@ -75,14 +76,32 @@ app.get('/edit/:filename', (req, res) => {
     })
 })
 
-app.post("/edit/:filename", (req, res) => {
 
-    fs.writeFile(`./files/${req.params.filename}`, `${req.body.filedata}`, (err) => {
-        if (err) console.log(err.message);
+app.post("/edit/:filename", async (req, res) => {
+    try {
+        let originalFilename = req.params.filename;
+        let newFilename = req.body.filename;
+        let newFileData = req.body.filedata;
 
-    })
-    res.redirect(`/files/${req.params.filename}`);
-})
+        const currentData = await fss.readFile(`./files/${originalFilename}`, "utf-8");
+
+        if (originalFilename !== newFilename) {
+            await fss.rename(`./files/${originalFilename}`, `./files/${newFilename}`);
+            originalFilename = newFilename;
+        }
+
+
+        if (currentData !== newFileData) {
+            await fss.writeFile(`./files/${originalFilename}`, newFileData, "utf-8");
+        }
+
+        res.redirect("/");
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("An error occurred");
+    }
+});
+
 
 app.listen(5000, (err) => {
     if (err) console.log("Error: " + err.message);
